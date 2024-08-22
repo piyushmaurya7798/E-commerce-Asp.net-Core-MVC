@@ -17,4 +17,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\Images\" />
+  </ItemGroup>
+
 </Project>

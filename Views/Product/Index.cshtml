@@ -1,0 +1,29 @@
+﻿@model List<Product>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+<a asp-action="AddProduct" class="btn btn-success">Add Product</a>
+<partial name="Notification"></partial>
+<br />
+<br />
+<div class="d-flex">
+    @foreach (var d in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" width="200" height="200" src="@d.Image" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@d.Name</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Category : @d.Category</li>
+                <li class="list-group-item">Category : @d.Description</li>
+                <li class="list-group-item">Price : @d.Price</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="btn btn-info">Add To Cart</a>
+            </div>
+        </div>
+    }
+
+</div>

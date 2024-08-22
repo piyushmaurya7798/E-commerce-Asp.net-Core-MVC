@@ -1,5 +1,5 @@
-﻿@model AddToCart.Models.User
-
+﻿<partial name="Notification" ></partial>
+@model AddToCart.Models.Login
 <section class="vh-100 bg-image"
          style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');width:100%;margin:0;padding:0">
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -10,19 +10,21 @@
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Login</h2>
 
-                            <form method="post">
+                            <form asp-action="Login">
 
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input asp-for="Email" type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                                    <label asp-for="Email" class="form-label" for="form3Example3cg">Your Email</label>
+                                    <input asp-for="email" type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example3cg">Your Email</label>
+                                    <span> @TempData["ErrorEmail"] </span>
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input asp-for="Password" type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                                    <label asp-for="Password" class="form-label" for="form3Example4cg">Password</label>
+                                    <input asp-for="password" type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cg">Password</label>
+                                    <span> @TempData["ErrorPassword"] </span>
                                 </div>
-
+                             
                                 <label class="form-check-label" for="form2Example3g">
                                     I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                                 </label>
