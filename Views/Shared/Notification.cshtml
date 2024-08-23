@@ -14,3 +14,12 @@
         toastr.error('@TempData["ErrorPassword"]')
     </script>
 }
+
+@if (TempData["AddToCart"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.success('@TempData["AddToCart"]')
+    </script>
+}

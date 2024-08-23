@@ -70,7 +70,7 @@ namespace AddToCart.Controllers
                 if (log.password == data.Password)
                 {
                     HttpContext.Session.SetString("MyUser", data.Email);
-                    return RedirectToAction("Index","Dashboard");
+                    return RedirectToAction("Index","Product");
                 }
                 else 
                 {
