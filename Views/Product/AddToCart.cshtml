@@ -1,4 +1,7 @@
-﻿@model List<Cart>;
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+
+@model List<Cart>;
 
 <partial name="Notification"></partial>
 
@@ -9,7 +12,6 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body p-4">
-
                         <div class="row">
 
                             <div class="col-lg-7">
@@ -62,12 +64,46 @@
                                     </div>
             }
                                 </div>
-                                <div>
-
-                                    <span><b>  Total Price : @TempData["totalprice"]</b></span>
-                                </div>
+                             
                             </div>
-                          
+                        @* </div> *@
+
+                            <div class="col-lg-5">
+
+                                <div class="card bg-primary text-white rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h5 class="mb-0">Complete Your Payment</h5>
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                                                 class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
+                                        </div>
+
+                                     
+
+                                        <hr class="my-4">
+
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Subtotal</p>
+                                            <p class="mb-2">&#8377; @HttpContextAccessor.HttpContext.Session.GetString("totalprice")</p>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <p class="mb-2">Total(Incl. taxes)</p>
+                                            <span class="mb-2"><b>  Total Price :  @HttpContextAccessor.HttpContext.Session.GetString("totalprice")</b></span>
+                                            @* <p >$4818.00</p> *@
+                                        </div>
+
+                                        <a asp-action="InitiateOrder" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg justify-content-center d-flex ">
+                                            <div style="display:flex;">
+                                                <div>&#8377;  @HttpContextAccessor.HttpContext.Session.GetString("totalprice")</div> &nbsp;
+                                                <div>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></div>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -77,3 +113,57 @@
         </div>
     </div>
 </section>
+
+@* 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var orderId = @ViewBag.orderid
+    var options = {
+        "key": "", // Enter the Key ID generated from the Dashboard
+        "amount": @HttpContextAccessor.HttpContext.Session.GetString("totalprice")+"00", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Acme Corp",
+        "description": "Buy Green Tea",
+        "order_id": orderId,
+        "image": "https://example.com/your_logo",
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "919000090000",
+        },
+        "notes": {
+            "address": "Hello World"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    }
+    // Boolean whether to show image inside a white frame. (default: true)
+    options.theme.image_padding = false;
+    options.handler = function (response) {
+        document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+        document.getElementById('razorpay_order_id').value = orderId;
+        document.getElementById('razorpay_signature').value = response.razorpay_signature;
+        document.razorpayForm.submit();
+    };
+    options.modal = {
+        ondismiss: function () {
+            console.log("This code runs when the popup is closed");
+        },
+        // Boolean indicating whether pressing escape key
+        // should close the checkout form. (default: true)
+        escape: true,
+        // Boolean indicating whether clicking translucent blank
+        // space outside checkout form should close the form. (default: false)
+        backdropclose: false
+    };
+    var rzp = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+        rzp.open();
+        e.preventDefault();
+    }
+</script>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js" asp-append-version="true"></script>
+ *@

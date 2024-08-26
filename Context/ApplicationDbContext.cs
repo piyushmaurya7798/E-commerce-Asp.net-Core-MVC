@@ -9,5 +9,6 @@ namespace AddToCart.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }

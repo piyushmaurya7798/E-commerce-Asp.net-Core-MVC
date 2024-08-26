@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Initiate Order";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h1>Initiate Order</h1>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var options = {
+                "key": '@ViewBag.KeyId', 
+                "amount": '@ViewBag.Amount', 
+                "currency": "INR",
+                "name": "Acme Corp",
+                "description": "Buy Green Tea",
+                "order_id": '@ViewBag.OrderId',
+                "image": "https://example.com/your_logo",
+                "theme": {
+                    "color": "#3399cc"
+                },
+                "callback_url": 'https://localhost:44364/Product/DonePayment',
+
+            };
+
+            var rzp = new Razorpay(options);
+            rzp.open();
+        });
+    </script>
+</body>
+</html>
